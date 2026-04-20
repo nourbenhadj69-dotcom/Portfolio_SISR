@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Situations professionnelles – BEN HADJ Nour El Houda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --bleu: #1a3d7c;
+    --bleu-dark: #0d2654;
+    --turquoise: #40e0d0;
+    --turquoise-light: rgba(64,224,208,0.12);
+    --gris-clair: #f5f6f8;
+    --texte: #2e2e2e;
+    --texte-light: #6b7a8d;
+    --border: rgba(26,61,124,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #ffffff;
+    color: var(--texte);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    background-color: #1e3caa;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-top: 8px;
+  }
+  .navbar-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 28px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .navbar-brand {
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+    padding: 12px 0;
+    margin-right: 32px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    flex: 1;
+    justify-content: space-around;
+    gap: 0;
+  }
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.2px;
+    padding: 14px 14px;
+    display: block;
+    position: relative;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; right: 50%;
+    height: 2px;
+    background: var(--turquoise);
+    transition: left 0.25s, right 0.25s;
+    border-radius: 2px 2px 0 0;
+  }
+  .nav-links a:hover::after,
+  .nav-links a.active::after { left: 10%; right: 10%; }
+  .nav-links a:hover { background: rgba(255,255,255,0.07); }
+  .nav-links a.active { background: rgba(255,255,255,0.15); }
+
+  /* ===== HERO ===== */
+  .page-hero {
+    background: #ffffff;
+    padding: 48px 20px 36px;
+    text-align: center;
+  }
+  .page-hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    letter-spacing: -0.3px;
+    color: var(--bleu);
+  }
+  .page-hero p {
+    color: var(--texte-light);
+    font-size: 0.88rem;
+    margin-top: 6px;
+  }
+  .hero-accent {
+    display: inline-block;
+    width: 40px;
+    height: 3px;
+    background: var(--turquoise);
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+
+  /* ===== MAIN ===== */
+  .main-wrapper {
+    max-width: 1060px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ===== GRANDE CARD CONTENEUR ===== */
+  .container-card {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 32px rgba(26,61,124,0.09);
+    overflow: hidden;
+    animation: fadeUp 0.5s ease 0.05s both;
+  }
+
+  .container-card-header {
+    background: linear-gradient(135deg, var(--bleu) 0%, var(--bleu-dark) 100%);
+    padding: 24px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .container-card-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 80% 50%, rgba(64,224,208,0.15) 0%, transparent 60%);
+  }
+  .container-card-header-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(64,224,208,0.2);
+    border: 1px solid rgba(64,224,208,0.4);
+    border-radius: 20px;
+    padding: 3px 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--turquoise);
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .container-card-header-badge span {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--turquoise);
+  }
+  .container-card-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #fff;
+    letter-spacing: -0.3px;
+    position: relative;
+    z-index: 1;
+  }
+  .container-card-sub {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== COLONNES ANNÉES ===== */
+  .years-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 300px;
+  }
+
+  .year-col {
+    padding: 28px 28px 32px;
+  }
+  .year-col:first-child {
+    border-right: 1px solid var(--border);
+  }
+
+  .year-col-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .year-icon {
+    width: 36px; height: 36px;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  }
+  .year-icon.an1 { background: linear-gradient(135deg, var(--bleu), #2558b8); }
+  .year-icon.an2 { background: linear-gradient(135deg, #1d7a60, var(--turquoise)); }
+
+  .year-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--bleu);
+  }
+  .year-subtitle {
+    font-size: 0.72rem;
+    color: var(--texte-light);
+    margin-top: 1px;
+  }
+
+  /* ===== PROJET CARDS ===== */
+  .projet-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .projet-card {
+    background: var(--gris-clair);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--turquoise);
+    padding: 16px 18px;
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    animation: fadeUp 0.5s ease both;
+  }
+  .year-col:nth-child(1) .projet-card:nth-child(1) { animation-delay: 0.15s; }
+  .year-col:nth-child(1) .projet-card:nth-child(2) { animation-delay: 0.25s; }
+  .year-col:nth-child(2) .projet-card:nth-child(1) { animation-delay: 0.35s; }
+  .year-col:nth-child(2) .projet-card:nth-child(2) { animation-delay: 0.45s; }
+
+  .projet-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(26,61,124,0.11);
+  }
+
+  .projet-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .projet-num {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--turquoise);
+    background: rgba(64,224,208,0.12);
+    border: 1px solid rgba(64,224,208,0.3);
+    border-radius: 20px;
+    padding: 2px 9px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .projet-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--bleu);
+    line-height: 1.35;
+  }
+  .projet-desc {
+    font-size: 0.78rem;
+    color: #4a5568;
+    line-height: 1.65;
+    margin-bottom: 14px;
+  }
+  .btn-voir {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--bleu);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.74rem;
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+    padding: 6px 14px;
+    border-radius: 20px;
+    transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    box-shadow: 0 2px 8px rgba(26,61,124,0.18);
+  }
+  .btn-voir:hover {
+    background: var(--turquoise);
+    color: var(--bleu);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(64,224,208,0.3);
+  }
+  .btn-voir::after { content: '→'; font-size: 0.8rem; }
+
+  /* ===== CTA ===== */
+  .cta-wrapper {
+    text-align: center;
+    margin-top: 36px;
+  }
+  .btn-primary {
+    display: inline-block;
+    background: var(--bleu);
+    color: #fff;
+    padding: 13px 36px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Syne', sans-serif;
+    font-size: 0.88rem;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 18px rgba(26,61,124,0.22);
+  }
+  .btn-primary:hover {
+    background: var(--turquoise);
+    color: var(--bleu);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(64,224,208,0.35);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background-color: #1e3a8a;
+    color: #fff;
+    text-align: center;
+    padding: 24px;
+    font-size: 0.82rem;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 680px) {
+    .years-grid { grid-template-columns: 1fr; }
+    .year-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    .container-card-header { padding: 20px 20px; }
+    .year-col { padding: 22px 18px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="#">Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="parcours.html">À propos</a></li>
+      <li><a href="formation.html">Schéma infrastructure</a></li>
+      <li><a href="situations.html" class="active">Situations professionnelles</a></li>
+      <li><a href="veille.html">Veille technologique</a></li>
+      <li><a href="competances.html">Compétences</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<div class="page-hero">
+  <h1>Situations Professionnelles</h1>
+  <p>Projets réalisés au cours de ma formation BTS SIO</p>
+  <div class="hero-accent"></div>
+</div>
+
+<!-- ===== MAIN ===== -->
+<div class="main-wrapper">
+
+  <!-- Grande card conteneur -->
+  <div class="container-card">
+
+    <!-- Header -->
+    <div class="container-card-header">
+      <div class="container-card-header-badge"><span></span>BTS SIO – SISR</div>
+      <div class="container-card-title">Mes projets</div>
+      <div class="container-card-sub">Situations professionnelles réalisées en première et deuxième année</div>
+    </div>
+
+    <!-- Grille années -->
+    <div class="years-grid">
+
+      <!-- ── PREMIÈRE ANNÉE ── -->
+      <div class="year-col">
+        <div class="year-col-header">
+          <div class="year-icon an1">1A</div>
+          <div>
+            <div class="year-title">Première année</div>
+            <div class="year-subtitle">2024 – 2025</div>
+          </div>
+        </div>
+
+        <div class="projet-cards">
+
+          <!-- Projet 1 -->
+          <div class="projet-card">
+            <div class="projet-card-top">
+              <div class="projet-title">Installation Baie de Brassage</div>
+              <span class="projet-num">Projet 01</span>
+            </div>
+            <p class="projet-desc">
+              Un projet réalisé en stage pour apprendre à comprendre les principes techniques d'une infrastructure réseau.
+            </p>
+            <a href="situation-projet1.html" class="btn-voir">Voir plus</a>
+          </div>
+
+          <!-- Projet 2 -->
+          <div class="projet-card">
+            <div class="projet-card-top">
+              <div class="projet-title">GLPI – Système de ticketing</div>
+              <span class="projet-num">Projet 02</span>
+            </div>
+            <p class="projet-desc">
+              Un projet réalisé en cours pour apprendre à utiliser un système de ticketing 
+              et gérer les incidents informatiques au sein d'une organisation.
+            </p>
+            <a href="situation-projet2.html" class="btn-voir">Voir plus</a>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── DEUXIÈME ANNÉE ── -->
+      <div class="year-col">
+        <div class="year-col-header">
+          <div class="year-icon an2">2A</div>
+          <div>
+            <div class="year-title">Deuxième année</div>
+            <div class="year-subtitle">2025 – 2026</div>
+          </div>
+        </div>
+
+        <div class="projet-cards">
+
+          <!-- Projet 3 -->
+          <div class="projet-card">
+            <div class="projet-card-top">
+              <div class="projet-title">Déploiement d’une infrastructure réseau informatique</div>
+              <span class="projet-num">Projet 03</span>
+            </div>
+            <p class="projet-desc">
+              Projet réalisé lors du deuxième stage, visant à comprendre le déploiement d’une nouvelle infrastructure réseau complète. 
+            </p>
+            <a href="situation-projet3.html" class="btn-voir">Voir plus</a>
+          </div>
+
+          <!-- Projet 4 -->
+          <div class="projet-card">
+            <div class="projet-card-top">
+              <div class="projet-title">Supervision Centreon</div>
+              <span class="projet-num">Projet 04</span>
+            </div>
+            <p class="projet-desc">
+              Projet réalisé au cours de la formation, visant à mettre en place une supervision réseau avec Centreon.
+            </p>
+            <a href="situation-projet4.html" class="btn-voir">Voir plus</a>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /years-grid -->
+  </div><!-- /container-card -->
+
+  <!-- CTA -->
+  <div class="cta-wrapper">
+    <a href="veille.html" class="btn-primary">Voir ma veille technologique</a>
+  </div>
+
+</div><!-- /main-wrapper -->
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <p>&copy; 2025  Nour El Houda BEN HADJ – Tous droits réservés</p>
+</footer>
+
+</body>
+</html>

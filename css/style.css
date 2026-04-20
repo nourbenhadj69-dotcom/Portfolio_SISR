@@ -1,0 +1,199 @@
+/* DARK MODE ADAPTÉ AU SYSTÈME */
+@media (prefers-color-scheme: dark) {
+  body.dark-aware {
+    background-color: #121212;
+    color: #f1f1f1;
+  }
+
+  .dark-bg {
+    background-color: #1f1f1f !important;
+  }
+
+  .dark-text {
+    color: #f1f1f1 !important;
+  }
+
+  .navbar,
+  .footer,
+  .btn {
+    transition: background-color 0.4s, color 0.4s;
+  }
+
+  .navbar-dark .navbar-nav .nav-link.active,
+  .navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffc107 !important;
+  }
+}
+
+/* FADE-IN & SLIDE-UP ANIMATIONS */
+.fade-in {
+  animation: fadeIn 1s ease-in both;
+}
+
+.slide-up {
+  animation: slideUp 1.2s ease-out both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== ANIMATIONS GÉNÉRALES ========== */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 1s ease forwards;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+/* Retarde chaque animation si plusieurs éléments ont la classe fade-in */
+.fade-in:nth-child(1) { animation-delay: 0.2s; }
+.fade-in:nth-child(2) { animation-delay: 0.4s; }
+.fade-in:nth-child(3) { animation-delay: 0.6s; }
+
+/* Animations pour les cards au survol */
+.card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 30px rgba(0, 123, 255, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Keyframes */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== DARK MODE ========== */
+
+body.dark-aware, .dark-bg {
+  background-color: #121212 !important;
+  color: #f5f5f5 !important;
+}
+
+.dark-text {
+  color: #ffffff;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: #f5f5f5;
+}
+
+footer.bg-dark {
+  background-color: #1a1a1a !important;
+}
+
+a.btn-outline-primary:hover {
+  background-color: #0d6efd;
+  color: white;
+}
+
+/* Optionnel : Lien hover doux */
+a:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+.certif-card {
+  background: linear-gradient(to right, #4285F4, #3B82F6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.certif-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.certif-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  background-color: #0f172a;
+  padding: 10px;
+  border-radius: 12px;
+}
+.veille-card .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.veille-card .card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.veille-card img {
+  object-fit: cover;
+  height: 200px;
+}
+body {
+  background-color: #000;
+  color: #fff;
+}
+
+.navbar, footer {
+  background-color: #111 !important;
+}
+
+.card {
+  background-color: #222 !important;
+  color: #fff !important;
+  border-radius: 1rem;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+a, a:hover, a:focus {
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #0b5ed7;
+  border-color: #0b5ed7;
+}
+
+.fade-in {
+  animation: fadeInAnimation ease 1.2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}

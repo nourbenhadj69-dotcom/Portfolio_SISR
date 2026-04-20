@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projet – GLPI</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    .footer-hide {
+      display: none;
+    }
+       
+    .navbar-nav {
+      align-items: center;
+    }
+
+    .navbar .nav-link {
+      padding: 0.5rem 1rem;            
+      font-weight: 500;               
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .navbar .nav-link:hover {
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* Navbar bleue */
+    .navbar {
+      background-color: #1e3a8a !important;
+    }
+
+    .navbar-brand {
+      color: #fff !important;
+      font-weight: bold;
+    }
+
+    /* Footer bleu */
+    footer {
+      background-color: #1e3a8a !important;
+      color: #ffffff !important;
+      border-top: none;
+    }
+
+    .navbar-collapse {
+      justify-content: center !important;
+    }
+
+    /* Fond blanc et texte noir sur les sections */
+    section {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    section h2, section h4, section p, section li {
+      color: #000000 !important;
+    }
+
+    /* Garder le titre principal en bleu */
+    .text-primary {
+      color: #1e3a8a !important;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm fade-in">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">Portfolio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="situations.html">Retour</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="py-5 fade-in">
+  <div class="container">
+    <h2 class="text-center text-primary mb-5">Projet – GLPI</h2>
+
+    <div class="mb-4">
+      <h4>Contexte</h4>
+      <p>
+Au cours de mon parcours en BTS SIO, spécialité SISR,
+ j'ai eu l'opportunité d'explorer GLPI (Gestionnaire Libre de Parc Informatique).
+  Cette expérience visait à m'approprier les mécanismes d'une plateforme dédiée à la gestion des incidents,
+   à travers l'incarnation de diverses fonctions (utilisateur en libre-service, administrateur) 
+     et la mise en œuvre de scénarios variés d'assistance technique..
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <h4>Besoin</h4>
+      <p>Installer un environnemnet de
+         test basé sur GLPI 10.0.6 permettant de :</p>
+      <ul>
+        <li>Créer et piloter des comptes utilisateurs 
+          dotés de permissions spécifiques.</li>
+        <li>Enrichir l'inventaire du parc
+           informatique (imprimantes).</li>
+        <li>SSimuler le traitement de demandes d'assistance 
+          selon leurs diverses phases d'évolution.</li>
+      </ul>
+    </div>
+
+    <div class="mb-4">
+      <h4>Environnement</h4>
+      <ul>
+        <li>GLPI version 10.0.6 hébergé sur une machine 
+          virtuelle créée avec VirtualBox</li>
+        <li>Système d'exploitation Linux
+           (type Debian, Ubuntu)</li>
+        <li>Interface GLPI accessible depuis un navigateur 
+          internet (Chrome/Firefox)</li>
+        <li>Environnement réseau local simulé 
+          pour les manipulations</li>
+      </ul>
+    </div>
+
+   <div class="mb-4"> 
+    <div class="mb-4"> 
+      <h4>Réalisation</h4>
+      <ul>
+        <li>
+          <strong>Création de la machine virtuelle :</strong> Utilisation de <strong>VirtualBox</strong> pour installer Ubuntu comme système invité.
+        </li>
+        <li>
+          <strong>Installation de GLPI :</strong> Téléchargement et installation de GLPI 10.0.6 avec tous les programmes nécessaires
+        </li>
+        <li>
+          <strong>Configuration initiale :</strong>  Paramétrage de GLPI via le navigateur pour créer le compte administrateur
+        </li>
+        <li>
+          <strong>Gestion des profils utilisateurs :</strong>  Création d'un utilisateur "self-service" qui peut créer des tickets sans pouvoir administrer.
+        </li>
+        <li>
+          <strong>Ajout de matériel dans le parc :</strong>  Enregistrement d'équipements (comme une imprimante) dans la section Parc > Imprimantes
+        </li>
+        <li>
+          <strong>Simulation de tickets d'incidents :</strong>  Création de six tickets avec le compte utilisateur, puis changement de leur état par l'administrateur : 
+          <ul>
+            <li>Nouveau</li>
+            <li>En attente</li>
+            <li>Assigné</li>
+            <li>Planifié</li>
+            <li>Résolu</li>
+            <li>Fermé</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div class="mb-4">
+      <h4>Bilan</h4>
+      <p>
+        Cette expérience m'a permis de découvrir concrètement GLPI et d'apprendre à gérer le matériel informatique et les demandes d'assistance.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<footer class="text-white text-center py-4 mt-5 fade-in">
+  <div class="container">
+    <p>&copy; 2025 Nour El Houda BEN HADJ – Tous droits réservés</p>
+  </div>
+</footer>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

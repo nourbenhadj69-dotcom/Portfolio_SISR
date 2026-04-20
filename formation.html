@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Schéma Infrastructure – BTS SIO</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  /* ===== VARIABLES PORTFOLIO ===== */
+  :root {
+    --bleu: #1a3d7c;
+    --bleu-dark: #0d2654;
+    --turquoise: #40e0d0;
+    --turquoise-light: rgba(64,224,208,0.12);
+    --texte: #2e2e2e;
+    --texte-light: #6b7a8d;
+    --border: rgba(26,61,124,0.1);
+
+    /* Variables diagramme — thème clair */
+    --bg-diag: #f8fafd;
+    --panel: #ffffff;
+    --border-diag: #c8d8ea;
+    --dmz: #c45c1a;
+    --dmz-bg: rgba(196,92,26,0.06);
+    --dmz-border: rgba(196,92,26,0.28);
+    --lan: #1a7a3c;
+    --lan-bg: rgba(26,122,60,0.06);
+    --lan-border: rgba(26,122,60,0.28);
+    --ext: #c41a3c;
+    --ext-bg: rgba(196,26,60,0.06);
+    --ext-border: rgba(196,26,60,0.28);
+    --fw: #e8c840;
+    --fw-bg: rgba(232,200,64,0.07);
+    --text-diag: #1a2d4a;
+    --text-dim: #6b7a8d;
+    --accent: #1a3d7c;
+    --glow: rgba(26,61,124,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #ffffff;
+    color: var(--texte);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    background-color: #1e3caa;
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    margin-top: 8px;
+  }
+  .navbar-inner {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 28px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .navbar-brand {
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 12px 0;
+    margin-right: 32px;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    flex: 1;
+    justify-content: space-around;
+  }
+  .nav-links a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 14px 14px;
+    display: block;
+    position: relative;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; right: 50%;
+    height: 2px;
+    background: var(--turquoise);
+    transition: left 0.25s, right 0.25s;
+    border-radius: 2px 2px 0 0;
+  }
+  .nav-links a:hover::after,
+  .nav-links a.active::after { left: 10%; right: 10%; }
+  .nav-links a:hover { background: rgba(255,255,255,0.07); }
+  .nav-links a.active { background: rgba(255,255,255,0.15); }
+
+  /* ===== HERO ===== */
+  .page-hero {
+    background: #ffffff;
+    padding: 48px 20px 36px;
+    text-align: center;
+  }
+  .page-hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.6rem;
+    color: var(--bleu);
+  }
+  .page-hero p {
+    color: var(--texte-light);
+    font-size: 0.88rem;
+    margin-top: 6px;
+  }
+  .hero-accent {
+    display: inline-block;
+    width: 40px;
+    height: 3px;
+    background: var(--turquoise);
+    border-radius: 2px;
+    margin-top: 12px;
+  }
+
+  /* ===== MAIN ===== */
+  .main-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+  }
+
+  /* ===== SCHEMA CARD WRAPPER ===== */
+  .schema-card {
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--turquoise);
+    box-shadow: 0 6px 32px rgba(26,61,124,0.09);
+    overflow: hidden;
+    animation: fadeUp 0.5s ease 0.05s both;
+    margin-bottom: 40px;
+  }
+  .schema-card-header {
+    padding: 22px 32px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .schema-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--turquoise-light);
+    border: 1px solid rgba(64,224,208,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .schema-card-header-text h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    color: var(--bleu);
+    margin-bottom: 2px;
+  }
+  .schema-card-header-text p {
+    font-size: 0.75rem;
+    color: var(--texte-light);
+  }
+
+  /* ===== DIAGRAMME INTERACTIF ===== */
+  .diag-wrapper {
+    background: var(--bg-diag);
+    padding: 32px 24px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .diag-wrapper::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(26,61,124,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,61,124,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .diag-inner {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--text-diag);
+  }
+
+  /* ===== LIGNES DE CONNEXION SVG ===== */
+  .lines-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0; /* Derrière les blocs */
+  }
+  .net-line {
+    fill: none;
+    stroke-width: 2.5;
+    stroke-dasharray: 6 6;
+    animation: dashFlow 20s linear infinite;
+  }
+  .line-fw-lan { stroke: var(--lan); opacity: 0.6; }
+  .line-fw-dmz { stroke: var(--dmz); opacity: 0.6; }
+  .line-fw-ext { stroke: var(--ext); opacity: 0.6; }
+  .line-inet-ext { stroke: var(--accent); opacity: 0.5; }
+
+  @keyframes dashFlow {
+    to { stroke-dashoffset: -1000; }
+  }
+
+  /* ===== GRILLE 3 COLONNES ===== */
+  .diag-grid {
+    display: grid;
+    grid-template-columns: 1fr 180px 1fr;
+    gap: 20px;
+    align-items: start;
+    position: relative;
+    z-index: 1; /* Devant les lignes */
+  }
+  .col-left  { display: flex; flex-direction: column; gap: 16px; }
+  .col-center { display: flex; flex-direction: column; align-items: center; gap: 16px; }
+  .col-right { display: flex; align-items: flex-start; padding-top: 0; }
+
+  /* Internet */
+  .internet-zone {
+    display: flex; justify-content: center;
+    animation: fadeDown 0.6s 0.1s ease both;
+  }
+  .internet-node {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    position: relative;
+  }
+  .cloud-icon {
+    width: 60px; height: 60px;
+    background: rgba(26,61,124,0.07);
+    border: 1px solid rgba(26,61,124,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px;
+    animation: pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 16px rgba(26,61,124,0.1);
+    background: #f8fafd; /* Pour cacher les lignes derrière */
+  }
+  .internet-node .inet-label {
+    font-size: 9px; color: var(--accent);
+    letter-spacing: 2px; text-transform: uppercase;
+  }
+
+  /* Zone EXT */
+  .ext-zone-card {
+    background: var(--ext-bg);
+    border: 1px solid var(--ext-border);
+    border-radius: 14px; padding: 14px 16px;
+    --zone-color: var(--ext);
+    --zone-glow: rgba(168,22,46,0.15);
+    transition: box-shadow 0.3s;
+    animation: fadeDown 0.6s 0.2s ease both;
+    width: 100%;
+    background-color: #fcfdfe; /* Fond opaque pour masquer les lignes dessous */
+  }
+  .ext-zone-card:hover { box-shadow: 0 0 22px var(--zone-glow); }
+  .ext-inner { display: flex; flex-direction: column; gap: 8px; }
+
+  /* Pare-feu */
+  .firewall-node {
+    display: flex; flex-direction: column; align-items: center; gap: 7px;
+    background: #fff;
+    border: 2px solid var(--fw);
+    border-radius: 12px; padding: 14px 20px;
+    box-shadow: 0 2px 16px rgba(138,104,0,0.12);
+    cursor: pointer; transition: all 0.25s;
+    width: 100%; position: relative;
+    animation: fadeUp 0.5s 0.3s ease both;
+  }
+  .firewall-node:hover {
+    box-shadow: 0 4px 28px rgba(138,104,0,0.22); transform: scale(1.03);
+  }
+  .fw-icon { font-size: 28px; filter: drop-shadow(0 2px 4px rgba(138,104,0,0.3)); }
+  .fw-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: var(--fw); letter-spacing: 1px;
+  }
+  .fw-ips { font-size: 8.5px; color: rgba(138,104,0,0.75); text-align: center; line-height: 1.7; }
+
+  /* Zones DMZ + LAN */
+  .zone {
+    border-radius: 14px; padding: 16px; border: 1px solid;
+    transition: box-shadow 0.3s;
+    animation: fadeUp 0.6s 0.3s ease both;
+    background-color: #fcfdfe; /* Fond opaque */
+  }
+  .zone:hover { box-shadow: 0 0 22px var(--zone-glow); }
+  .zone.dmz {
+    border-color: var(--dmz-border);
+    --zone-glow: rgba(184,74,14,0.15); --zone-color: var(--dmz);
+    background-image: linear-gradient(var(--dmz-bg), var(--dmz-bg));
+  }
+  .zone.lan {
+    border-color: var(--lan-border);
+    --zone-glow: rgba(22,104,48,0.15); --zone-color: var(--lan);
+    background-image: linear-gradient(var(--lan-bg), var(--lan-bg));
+  }
+
+  .zone-header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 12px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-diag);
+  }
+  .zone-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--zone-color); box-shadow: 0 0 6px var(--zone-color);
+    flex-shrink: 0;
+  }
+  .zone-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px; font-weight: 700;
+    color: var(--zone-color); letter-spacing: 1px;
+  }
+  .zone-subnet {
+    margin-left: auto; font-size: 8px; color: var(--text-dim);
+    background: #fff; padding: 2px 6px;
+    border-radius: 4px; border: 1px solid var(--border-diag);
+  }
+
+  /* Grille serveurs */
+  .server-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 8px;
+  }
+  .server-card {
+    background: #ffffff;
+    border: 1px solid var(--border-diag); border-radius: 9px;
+    padding: 9px 7px; display: flex; flex-direction: column; align-items: center; gap: 5px;
+    cursor: pointer; transition: all 0.2s;
+    position: relative; overflow: hidden;
+    box-shadow: 0 1px 4px rgba(26,61,124,0.06);
+  }
+  .server-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; background: var(--zone-color);
+    opacity: 0; transition: opacity 0.2s;
+  }
+  .server-card:hover::before { opacity: 1; }
+  .server-card:hover {
+    border-color: var(--zone-color); transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+  }
+  .server-icon { font-size: 20px; filter: grayscale(0.2); transition: filter 0.2s; }
+  .server-card:hover .server-icon { filter: none; }
+  .server-name {
+    font-size: 8px; font-weight: 600;
+    color: var(--text-diag); text-align: center;
+    line-height: 1.3; letter-spacing: 0.4px;
+  }
+  .server-ip {
+    font-size: 7.5px; color: var(--zone-color);
+    background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.06);
+    padding: 2px 5px; border-radius: 4px;
+    width: 100%; text-align: center;
+  }
+
+  /* Légende */
+  .schema-legend {
+    padding: 14px 28px 20px; display: flex; flex-wrap: wrap; gap: 14px;
+    border-top: 1px solid var(--border); background: #fafbfc;
+  }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 0.74rem; color: var(--texte-light); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+
+  /* ===== TOOLTIP ===== */
+  .tooltip-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.72); z-index: 200;
+    align-items: center; justify-content: center; backdrop-filter: blur(5px);
+  }
+  .tooltip-overlay.visible { display: flex; }
+  .tooltip-box {
+    background: #ffffff; border: 1px solid #c8d8ea;
+    border-radius: 16px; padding: 28px 32px;
+    max-width: 400px; width: 90%; position: relative;
+    animation: popIn 0.2s ease both; box-shadow: 0 8px 40px rgba(26,61,124,0.15);
+  }
+  .tooltip-box h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px; font-weight: 700; color: var(--bleu); margin-bottom: 12px;
+  }
+  .tip-ip {
+    font-size: 11px; color: var(--bleu);
+    padding: 4px 10px; background: rgba(26,61,124,0.07);
+    border-radius: 6px; display: inline-block;
+    margin-bottom: 10px; font-family: 'JetBrains Mono', monospace;
+    border: 1px solid rgba(26,61,124,0.15);
+  }
+  .tooltip-box p { font-size: 12px; color: var(--texte-light); line-height: 1.7; font-family: 'DM Sans', sans-serif; }
+  .tooltip-close {
+    position: absolute; top: 14px; right: 16px;
+    background: none; border: none; color: var(--texte-light); font-size: 18px;
+    cursor: pointer; line-height: 1;
+  }
+  .tooltip-close:hover { color: var(--bleu); }
+
+  /* ===== CTA ===== */
+  .btn-cta {
+    display: inline-block; background: var(--bleu); color: #fff;
+    padding: 13px 36px; border-radius: 50px; text-decoration: none; font-weight: 600;
+    font-family: 'Syne', sans-serif; font-size: 0.88rem;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 18px rgba(26,61,124,0.22);
+  }
+  .btn-cta:hover {
+    background: var(--turquoise); color: var(--bleu);
+    transform: translateY(-2px); box-shadow: 0 8px 24px rgba(64,224,208,0.35);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background-color: #1e3a8a; color: #fff; text-align: center; padding: 24px;
+    font-size: 0.82rem; border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes fadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%, 100% { box-shadow: 0 0 16px rgba(26,61,124,0.1); } 50% { box-shadow: 0 0 28px rgba(26,61,124,0.22); } }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 780px) {
+    .nav-links { display: none; }
+    .diag-grid { grid-template-columns: 1fr; }
+    .col-right { margin-top: 0; }
+    .diag-wrapper { padding: 20px 12px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="index.html">Portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="parcours.html">À propos</a></li>
+      <li><a href="formation.html" class="active">Schéma infrastructure</a></li>
+      <li><a href="situations.html">Situations professionnelles</a></li>
+      <li><a href="veille.html">Veille technologique</a></li>
+      <li><a href="competances.html">Compétences</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <h1>Schéma d'infrastructure</h1>
+  <p>Architecture réseau du lycée — Ferme de serveurs interactive</p>
+  <div class="hero-accent"></div>
+</div>
+
+<div class="main-wrapper">
+
+  <div class="schema-card">
+    <div class="schema-card-header">
+      <div class="schema-icon">🖧</div>
+      <div class="schema-card-header-text">
+        <h3>Ferme de Serveur — Infrastructure réseau</h3>
+        <p>Lycée Jacques Brel, Lyon · Cliquer sur un équipement pour afficher les détails</p>
+      </div>
+    </div>
+
+    <div class="diag-wrapper">
+      <div class="diag-inner">
+
+        <svg class="lines-overlay" id="linesOverlay"></svg>
+
+        <div class="diag-grid">
+
+          <div class="col-left">
+            <div class="zone lan" id="zone-lan">
+              <div class="zone-header">
+                <div class="zone-dot"></div>
+                <span class="zone-title">LAN</span>
+                <span class="zone-subnet">10.0.204.65 /26</span>
+              </div>
+              <div class="server-grid">
+                <div class="server-card" onclick="showInfo('SERVEUR AD 1','10.0.204.66','Contrôleur de domaine Active Directory principal. Gère l\'authentification, les stratégies de groupe (GPO) et les ressources du domaine.')">
+                  <div class="server-icon">🏢</div><div class="server-name">AD 1</div><div class="server-ip">10.0.204.66</div>
+                </div>
+                <div class="server-card" onclick="showInfo('SERVEUR AD 2','10.0.204.76','Contrôleur de domaine secondaire. Assure la redondance de l\'Active Directory en cas de défaillance d\'AD 1.')">
+                  <div class="server-icon">🏢</div><div class="server-name">AD 2</div><div class="server-ip">10.0.204.76</div>
+                </div>
+                <div class="server-card" onclick="showInfo('SERVEUR FICHIER','10.0.204.67','Serveur de fichiers partagés pour les utilisateurs du domaine. Gestion des droits via Active Directory.')">
+                  <div class="server-icon">📁</div><div class="server-name">FICHIER</div><div class="server-ip">10.0.204.67</div>
+                </div>
+                <div class="server-card" onclick="showInfo('CLIENT DEBIAN','10.0.204.80','Poste client Linux Debian intégré au réseau LAN. Utilisé pour les tests et la supervision depuis l\'intérieur.')">
+                  <div class="server-icon">💻</div><div class="server-name">CLIENT DEBIAN</div><div class="server-ip">10.0.204.80</div>
+                </div>
+                <div class="server-card" onclick="showInfo('SERVEUR TrueNAS','10.0.204.68','Solution NAS TrueNAS. Stockage centralisé, snapshots ZFS et partages réseau pour les serveurs et utilisateurs.')">
+                  <div class="server-icon">💾</div><div class="server-name">TrueNAS</div><div class="server-ip">10.0.204.68</div>
+                </div>
+                <div class="server-card" onclick="showInfo('CLIENT Win11','10.0.204.88','Poste Windows 11 rattaché au domaine Active Directory. Représente un utilisateur final du réseau interne.')">
+                  <div class="server-icon">🖥️</div><div class="server-name">CLIENT Win11</div><div class="server-ip">10.0.204.88</div>
+                </div>
+                <div class="server-card" onclick="showInfo('Serveur Supervision','10.0.204.69','Serveur de supervision réseau Centreon. Surveille l\'état des équipements via SNMP (SNMPv2/v3) et génère des alertes en cas d\'anomalie.')">
+                  <div class="server-icon">📊</div><div class="server-name">Supervision</div><div class="server-ip">10.0.204.69</div>
+                </div>
+                <div class="server-card" onclick="showInfo('Serveur Wazuh','10.0.204.70','Plateforme SIEM Wazuh. Collecte et analyse les logs de sécurité, détection d\'intrusions (IDS) et réponse aux incidents sur l\'ensemble du parc.')">
+                  <div class="server-icon">🛡️</div><div class="server-name">Wazuh</div><div class="server-ip">10.0.204.70</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="zone dmz" id="zone-dmz">
+              <div class="zone-header">
+                <div class="zone-dot"></div>
+                <span class="zone-title">DMZ</span>
+                <span class="zone-subnet">10.0.204.0 /26</span>
+              </div>
+              <div class="server-grid">
+                <div class="server-card" onclick="showInfo('SERVEUR LAMP','10.0.204.10','Serveur LAMP (Linux, Apache, MariaDB, PHP). Héberge l\'application web principale de la ferme. Accessible depuis la DMZ.')">
+                  <div class="server-icon">🖧</div><div class="server-name">SERVEUR LAMP</div><div class="server-ip">10.0.204.10</div>
+                </div>
+                <div class="server-card" onclick="showInfo('SERVEUR HA_PROXY','10.0.204.12','Reverse proxy et load balancer HAProxy. Répartit les requêtes entre WEB 1 et WEB 2 en round-robin avec persistance de session par cookie.')">
+                  <div class="server-icon">⚖️</div><div class="server-name">SERVEUR HA_PROXY</div><div class="server-ip">10.0.204.12</div>
+                </div>
+                <div class="server-card" onclick="showInfo('WEB 1','10.0.204.13','Serveur web Apache 1 — nœud du cluster géré par HAProxy. Répond aux requêtes HTTP/HTTPS réparties par le load balancer.')">
+                  <div class="server-icon">🌐</div><div class="server-name">WEB 1</div><div class="server-ip">10.0.204.13</div>
+                </div>
+                <div class="server-card" onclick="showInfo('WEB 2','10.0.204.14','Serveur web Apache 2 — second nœud du cluster. Assure la haute disponibilité en cas de panne de WEB 1.')">
+                  <div class="server-icon">🌐</div><div class="server-name">WEB 2</div><div class="server-ip">10.0.204.14</div>
+                </div>
+              </div>
+            </div>
+          </div><div class="col-center">
+            <div class="internet-zone">
+              <div class="internet-node" id="node-inet">
+                <div class="cloud-icon">☁️</div>
+                <div class="inet-label">Internet</div>
+              </div>
+            </div>
+            <div class="firewall-node" id="node-fw"
+                 onclick="showInfo('PARE-FEU (IPFire)','EXT: 172.28.204.253 | DMZ: 10.0.204.1/26 | LAN: 10.0.204.65/26','Pare-feu central de la ferme de serveur. Filtre le trafic entre les trois zones : EXT (internet), DMZ (serveurs publics) et LAN (réseau interne). Cloisonnement strict de chaque segment.')">
+              <div class="fw-icon">🔥</div>
+              <div class="fw-name">PARE-FEU</div>
+              <div class="fw-ips">
+                EXT → 172.28.204.253<br>
+                DMZ → 10.0.204.1 /26<br>
+                LAN → 10.0.204.65 /26
+              </div>
+            </div>
+          </div><div class="col-right">
+            <div class="ext-zone-card" id="zone-ext" style="--zone-color:var(--ext);">
+              <div class="zone-header" style="--zone-color:var(--ext);">
+                <div class="zone-dot" style="background:var(--ext);box-shadow:0 0 6px var(--ext);"></div>
+                <span class="zone-title" style="color:var(--ext);">EXT</span>
+                <span class="zone-subnet">172.28.204.0 /24</span>
+              </div>
+              <div class="ext-inner">
+                <div class="server-card" style="--zone-color:var(--ext);"
+                     onclick="showInfo('SERVEUR DNS','172.28.204.231','Serveur DNS de la zone externe. Résolution de noms pour les clients et postes de la zone EXT.')">
+                  <div class="server-icon">🗄️</div><div class="server-name">SERVEUR DNS</div><div class="server-ip" style="color:var(--ext);">172.28.204.231</div>
+                </div>
+                <div class="server-card" style="--zone-color:var(--ext);"
+                     onclick="showInfo('POSTE','172.28.204.x','Poste de travail de la zone externe.')">
+                  <div class="server-icon">🖥️</div><div class="server-name">POSTE</div><div class="server-ip" style="color:var(--ext);">— — —</div>
+                </div>
+                <div class="server-card" style="--zone-color:var(--ext);"
+                     onclick="showInfo('CLIENT 1','172.28.204.55','Client de test en zone externe simulant un utilisateur depuis l\'extérieur.')">
+                  <div class="server-icon">💻</div><div class="server-name">CLIENT 1</div><div class="server-ip" style="color:var(--ext);">172.28.204.55</div>
+                </div>
+              </div>
+            </div>
+          </div></div></div></div><div class="schema-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#c45c1a;"></div><span>DMZ — 10.0.204.0/26</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c41a3c;"></div><span>EXT — 172.28.204.0/24</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#1a7a3c;"></div><span>LAN — 10.0.204.65/26</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#4ab8ff;"></div><span>Internet</span></div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e8c840;"></div><span>Pare-feu IPFire</span></div>
+    </div>
+
+  </div><div style="text-align:center; padding-top:24px;">
+    <a href="situations.html" class="btn-cta">Voir mes Situations Professionnelles</a>
+  </div>
+
+</div><div class="tooltip-overlay" id="tooltipOverlay" onclick="closeTooltip(event)">
+  <div class="tooltip-box">
+    <button class="tooltip-close" onclick="closeInfo()">✕</button>
+    <h3 id="tipTitle"></h3>
+    <div class="tip-ip" id="tipIp"></div>
+    <p id="tipDesc"></p>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 Nour El Houda BEN HADJ – Tous droits réservés</p>
+</footer>
+
+<script>
+  // --- Gestion du Tooltip ---
+  function showInfo(name, ip, desc) {
+    document.getElementById('tipTitle').textContent = name;
+    document.getElementById('tipIp').textContent = ip;
+    document.getElementById('tipDesc').textContent = desc;
+    document.getElementById('tooltipOverlay').classList.add('visible');
+  }
+  function closeInfo() {
+    document.getElementById('tooltipOverlay').classList.remove('visible');
+  }
+  function closeTooltip(e) {
+    if (e.target === document.getElementById('tooltipOverlay')) closeInfo();
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeInfo();
+  });
+
+  // --- Gestion des Lignes SVG ---
+  function drawLines() {
+    const svg = document.getElementById('linesOverlay');
+    if (!svg) return;
+
+    const container = document.querySelector('.diag-inner');
+    const rectContainer = container.getBoundingClientRect();
+
+    // Helper pour récupérer le point d'ancrage d'un élément
+    const getAnchor = (id, position) => {
+      const el = document.getElementById(id);
+      if (!el) return { x: 0, y: 0 };
+      const r = el.getBoundingClientRect();
+      let x = 0, y = 0;
+      if (position === 'right') { x = r.right; y = r.top + r.height / 2; }
+      else if (position === 'left') { x = r.left; y = r.top + r.height / 2; }
+      else if (position === 'top') { x = r.left + r.width / 2; y = r.top; }
+      else if (position === 'bottom') { x = r.left + r.width / 2; y = r.bottom; }
+      // Coordonnées relatives au conteneur SVG
+      return { x: x - rectContainer.left, y: y - rectContainer.top };
+    };
+
+    // Helper pour générer une courbe de Bézier élégante
+    const createCurve = (p1, p2, orientation) => {
+      if (orientation === 'H') {
+        const offset = Math.max(Math.abs(p2.x - p1.x) / 2, 20);
+        return `M ${p1.x} ${p1.y} C ${p1.x + offset} ${p1.y}, ${p2.x - offset} ${p2.y}, ${p2.x} ${p2.y}`;
+      } else if (orientation === 'V') {
+        const offset = Math.max(Math.abs(p2.y - p1.y) / 2, 20);
+        return `M ${p1.x} ${p1.y} C ${p1.x} ${p1.y + offset}, ${p2.x} ${p2.y - offset}, ${p2.x} ${p2.y}`;
+      } else if (orientation === 'MIX') {
+        return `M ${p1.x} ${p1.y} C ${p1.x + 30} ${p1.y}, ${p2.x} ${p2.y - 30}, ${p2.x} ${p2.y}`;
+      }
+    };
+
+    const isMobile = window.innerWidth <= 780;
+    let paths = '';
+
+    if (!isMobile) {
+      // Configuration Bureau : Lignes horizontales / mixtes
+      const pLan = getAnchor('zone-lan', 'right');
+      const pDmz = getAnchor('zone-dmz', 'right');
+      const pFwL = getAnchor('node-fw', 'left');
+      const pFwR = getAnchor('node-fw', 'right');
+      const pExtL = getAnchor('zone-ext', 'left');
+      const pExtT = getAnchor('zone-ext', 'top');
+      const pInetR = getAnchor('node-inet', 'right');
+
+      paths += `<path class="net-line line-fw-lan" d="${createCurve(pLan, pFwL, 'H')}" />`;
+      paths += `<path class="net-line line-fw-dmz" d="${createCurve(pDmz, pFwL, 'H')}" />`;
+      paths += `<path class="net-line line-fw-ext" d="${createCurve(pFwR, pExtL, 'H')}" />`;
+      paths += `<path class="net-line line-inet-ext" d="${createCurve(pInetR, pExtT, 'MIX')}" />`;
+    } else {
+      // Configuration Mobile : Les blocs s'empilent, on connecte de haut en bas
+      const pLan = getAnchor('zone-lan', 'bottom');
+      const pDmz = getAnchor('zone-dmz', 'bottom');
+      const pFwT = getAnchor('node-fw', 'top');
+      const pFwB = getAnchor('node-fw', 'bottom');
+      const pExtT = getAnchor('zone-ext', 'top');
+      const pInetB = getAnchor('node-inet', 'bottom');
+
+      paths += `<path class="net-line line-fw-lan" d="${createCurve(pLan, pFwT, 'V')}" />`;
+      paths += `<path class="net-line line-fw-dmz" d="${createCurve(pDmz, pFwT, 'V')}" />`;
+      paths += `<path class="net-line line-fw-ext" d="${createCurve(pFwB, pExtT, 'V')}" />`;
+      paths += `<path class="net-line line-inet-ext" d="${createCurve(pInetB, pExtT, 'V')}" />`;
+    }
+
+    svg.innerHTML = paths;
+  }
+
+  // Tracer les lignes au chargement et au redimensionnement
+  window.addEventListener('load', drawLines);
+  window.addEventListener('resize', drawLines);
+  // Un petit délai pour s'assurer que la police et le layout sont bien calculés
+  setTimeout(drawLines, 150);
+</script>
+
+</body>
+</html>

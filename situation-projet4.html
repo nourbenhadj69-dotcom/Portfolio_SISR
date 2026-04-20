@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Supervision réseau – Centreon</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    body {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    .footer-hide {
+      display: none;
+    }
+
+    .navbar-nav {
+      align-items: center;
+    }
+
+    .navbar .nav-link {
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .navbar .nav-link:hover {
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    .navbar {
+      background-color: #1e3a8a !important;
+    }
+
+    .navbar-brand {
+      color: #fff !important;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #1e3a8a !important;
+      color: #ffffff !important;
+      border-top: none;
+    }
+
+    .navbar-collapse {
+      justify-content: center !important;
+    }
+
+    section {
+      background-color: #ffffff !important;
+      color: #000000 !important;
+    }
+
+    section h2, section h4, section p, section li {
+      color: #000000 !important;
+    }
+
+    .text-primary {
+      color: #1e3a8a !important;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm fade-in">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold" href="#">Portfolio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+        <li class="nav-item"><a class="nav-link" href="situations.html">Retour</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<section class="py-5 fade-in">
+  <div class="container">
+    <h2 class="text-center text-primary mb-5">Supervision réseau avec Centreon</h2>
+
+    <div class="mb-4">
+      <h4>Contexte</h4>
+      <p>
+        Au cours de ma 2ème année de BTS SIO, j'ai réalisé un projet de supervision réseau en
+        utilisant Centreon, permettant de surveiller en temps réel l'état des équipements et des
+        services. Ce projet m'a permis de configurer des alertes, analyser les performances du réseau
+        et améliorer la disponibilité des infrastructures.
+      </p>
+    </div>
+
+    <div class="mb-4">
+      <h4>Besoin</h4>
+      <ul>
+        <li>Déployer une solution de supervision sur l'ensemble des équipements réseau</li>
+        <li>Monitorer en temps réel l'état des services et des machines</li>
+        <li>Assurer la disponibilité des différents services du réseau</li>
+        <li>Détecter rapidement les pannes ou anomalies sur l'infrastructure</li>
+      </ul>
+    </div>
+
+    <div class="mb-4">
+      <h4>Environnement</h4>
+      <ul>
+        <li>Machine virtuelle créée et configurée sous Proxmox</li>
+        <li>Système d'exploitation Linux Debian 12 installé</li>
+        <li>Interface Centreon accessible depuis un navigateur via l'adresse https://10.0.204.69</li>
+        <li>Environnement réseau local simulé pour les tests de supervision</li>
+      </ul>
+    </div>
+
+    <div class="mb-4">
+      <h4>Réalisation</h4>
+      <ul>
+        <li>
+          <strong>Création de la machine virtuelle :</strong> déploiement d'une VM sous Proxmox avec une distribution Linux
+        </li>
+        <li>
+          <strong>Installation de Centreon :</strong> mise en place de l'outil de supervision sur la machine virtuelle
+        </li>
+        <li>
+          <strong>Configuration initiale :</strong> paramétrage de Centreon, ajout des hôtes et des services à surveiller
+        </li>
+        <li>
+          <strong>Supervision des machines :</strong> monitoring en temps réel des équipements réseau et vérification de leur disponibilité
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<footer class="text-white text-center py-4 mt-5 fade-in">
+  <div class="container">
+    <p>&copy; 2025 Nour El Houda BEN HADJ – Tous droits réservés</p>
+  </div>
+</footer>
+
+<script src="js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

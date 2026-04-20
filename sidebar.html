@@ -1,0 +1,105 @@
+<!-- sidebar.html -->
+<button id="menu-btn" class="btn btn-primary">
+  <i class="bi bi-list"></i>
+</button>
+
+<!-- Sidebar -->
+<div id="sidebar" class="sidebar">
+  <button id="close-btn">&times;</button>
+  <ul class="sidebar-menu">
+    <li><a href="index.html">Accueil</a></li>
+    <li><a href="parcours.html">Parcours scolaire</a></li>
+    <li><a href="experiences.html">Expériences professionnelles</a></li>
+    <li><a href="situations.html">Situations professionnelles</a></li>
+    <li><a href="veille.html">Veille technologique</a></li>
+    <li><a href="competances.html">Compétance</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</div>
+
+<style>
+  body {
+    background-color: #ffffff; /* Blanc */
+  }
+
+  /* Sidebar style */
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1050;
+    top: 0;
+    left: 0;
+    background-color: #1e3a8a; /* Bleu foncé */
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+  }
+
+  .sidebar-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-menu li {
+    padding: 15px 20px;
+  }
+
+  .sidebar-menu li a {
+    color: #ffffff; /* Blanc sur bleu */
+    text-decoration: none;
+    font-size: 1.2rem;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .sidebar-menu li a:hover {
+    background-color: #d1d5db; /* Gris clair */
+    color: #1e3a8a; /* Bleu foncé */
+  }
+
+  #menu-btn {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1100;
+    background-color: #1e3a8a;
+    border-color: #1e3a8a;
+  }
+
+  #menu-btn:hover {
+    background-color: #40e0d0; /* Turquoise */
+    border-color: #40e0d0;
+    color: #ffffff;
+  }
+
+  #close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: #ffffff; /* Blanc */
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+
+  #close-btn:hover {
+    color: #40e0d0; /* Turquoise */
+  }
+</style>
+
+<script>
+  const sidebar = document.getElementById("sidebar");
+  const menuBtn = document.getElementById("menu-btn");
+  const closeBtn = document.getElementById("close-btn");
+
+  menuBtn.onclick = () => {
+    sidebar.style.width = "250px";
+  };
+  closeBtn.onclick = () => {
+    sidebar.style.width = "0";
+  };
+</script>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact – BEN HADJ Nour El Houda</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bleu: #1e3caa;
+      --bleu-dark: #0d2654;
+      --turquoise: #40e0d0;
+      --texte: #2e2e2e;
+      --texte-light: #6b7a8d;
+      --border: rgba(26,61,124,0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #ffffff;
+      color: var(--texte);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      background-color: var(--bleu);
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin-top: 8px;
+    }
+    .navbar-inner {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 28px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+    }
+    .navbar-brand {
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: 0.2px;
+      padding: 12px 0;
+      margin-right: 32px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      flex: 1;
+      justify-content: space-around;
+      gap: 0;
+    }
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.2px;
+      padding: 14px 14px;
+      display: block;
+      position: relative;
+      transition: background 0.2s;
+      white-space: nowrap;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; right: 50%;
+      height: 2px;
+      background: var(--turquoise);
+      transition: left 0.25s, right 0.25s;
+      border-radius: 2px 2px 0 0;
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after { left: 10%; right: 10%; }
+    .nav-links a:hover { background: rgba(255,255,255,0.07); }
+    .nav-links a.active { background: rgba(255,255,255,0.15); }
+
+    /* ===== MAIN ===== */
+    main { flex: 1; }
+
+    /* ===== PAGE HEADER ===== */
+    .page-header {
+      text-align: center;
+      padding: 70px 20px 48px;
+    }
+    .page-header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--bleu);
+      margin-bottom: 12px;
+    }
+    .page-header .subtitle {
+      font-size: 0.95rem;
+      color: var(--texte-light);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .header-line {
+      width: 48px;
+      height: 3px;
+      background: var(--turquoise);
+      margin: 0 auto;
+      border-radius: 2px;
+    }
+
+    /* ===== CONTACT CARDS ===== */
+    .contact-section {
+      max-width: 960px;
+      margin: 10px auto 80px;
+      padding: 0 24px;
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      flex-wrap: wrap;
+    }
+
+    .contact-card {
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 16px rgba(30,60,170,0.08);
+      border: 1px solid #e5e7eb;
+      border-left: 4px solid var(--turquoise);
+      padding: 38px 28px 34px;
+      width: 268px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .contact-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(30,60,170,0.13);
+    }
+    .contact-card .icon {
+      font-size: 32px;
+      color: var(--turquoise);
+      margin-bottom: 14px;
+    }
+    .contact-card .label {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--bleu);
+      margin-bottom: 8px;
+    }
+    .contact-card .info {
+      font-size: 0.875rem;
+      color: var(--texte-light);
+      word-break: break-word;
+    }
+    .contact-card .info a {
+      color: var(--texte-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-card .info a:hover {
+      color: var(--turquoise);
+      text-decoration: underline;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background-color: #1e3a8a;
+      color: #fff;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.82rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 40px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 540px) {
+      .nav-links { display: none; }
+      .page-header h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a class="navbar-brand" href="index.html">Portfolio</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="parcours.html">À propos</a></li>
+        <li><a href="formation.html">Schéma infrastructure</a></li>
+        <li><a href="situations.html">Situations professionnelles</a></li>
+        <li><a href="veille.html">Veille technologique</a></li>
+        <li><a href="competances.html">Compétences</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN ===== -->
+  <main>
+    <div class="page-header">
+      <h1>Contact</h1>
+      <p class="subtitle">Restons en contact. N'hésitez pas à me joindre pour toute question, collaboration</p>
+      <div class="header-line"></div>
+    </div>
+
+    <div class="contact-section">
+
+      <div class="contact-card">
+        <div class="icon"><i class="fas fa-envelope-open-text"></i></div>
+        <div class="label">Email</div>
+        <div class="info"><a href="mailto:nourbenhadj69@gmail.com">nourbenhadj69@gmail.com</a></div>
+      </div>
+
+      <div class="contact-card">
+        <div class="icon"><i class="fab fa-linkedin"></i></div>
+        <div class="label">LinkedIn</div>
+        <div class="info"><a href="https://www.linkedin.com/in/nour-el-houda-ben-hadj-6b8a13395/" target="_blank">Nour El Houda Ben Hadj</a></div>
+      </div>
+
+      <div class="contact-card">
+        <div class="icon"><i class="fas fa-phone"></i></div>
+        <div class="label">Téléphone</div>
+        <div class="info"><a href="tel:0753467394">07 53 46 73 94</a></div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2025 Nour El Houda BEN HADJ – Tous droits réservés</p>
+  </footer>
+
+</body>
+</html>
